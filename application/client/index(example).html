@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <title>Hyperledger Fabric AB Store</title>
+
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+
+   <style type="text/css">
+     header{
+       background-color: lightgray;
+       font-size:20px;
+       padding:20px;
+     }
+     header, .form-group{
+       margin-bottom: 3%;
+     }
+     .form-group{
+       width:50%;
+     }
+     #body{
+       margin-left:3%;
+       margin-right:3%;
+     }
+     .form-control{
+       margin: 8px;
+     }
+     label{
+       font-size:20px;
+     }
+   </style>
+ </head>
+ <body ng-app="application" ng-controller="AppCtrl">
+    <header>
+      <div id="left_header">Hyperledger Fabric AB Store Application</div>
+    </header>
+    <div id="body">
+
+      <div class="form-group">
+        <label>Init</label>
+        <h5 style="color:green;margin-bottom:2%" id="success_init">{{init_ab}}</h5>
+        <br>
+        A: <input class="form-control" type="text" placeholder="Ex: Hyper" ng-model="userinfo.user">
+        A Value: <input class="form-control" type="text" placeholder="Ex: 100" ng-model="userinfo.userval">
+      
+        <input id="initAB" type="submit" value="Create" class="btn btn-primary" ng-click="initAB()">
+      </div>
+
+      <hr>
+
+      <div class="form-group">
+        <label>charge</label>
+        <h5 style="color:green;margin-bottom:2%" id="success_charge">{{charge_ab}}</h5>
+        <br>
+        A: <input class="form-control" type="text" placeholder="Ex: Hyper" ng-model="charge.user">
+        A Value: <input class="form-control" type="text" placeholder="Ex: 100" ng-model="charge.userval">
+      
+        <input id="chargeAB" type="submit" value="Create" class="btn btn-primary" ng-click="chargeAB()">
+      </div>
+
+      <hr>
+
+      <div class="form-group">
+        <label>InitItem</label>
+        <h5 style="color:green;margin-bottom:2%" id="success_initItem">{{initItem_ab}}</h5>
+        <br>
+        이름 <input class="form-control" type="text" placeholder="Ex: Hyper" ng-model="Item.itemName">
+        품명 <input class="form-control" type="text" placeholder="Ex: 100" ng-model="Item.styleNum">
+        브랜드 <input class="form-control" type="text" placeholder="Ex: team2" ng-model="Item.brand">
+        재고량 <input class="form-control" type="text" placeholder="Ex: good goods" ng-model="Item.inventory">
+      
+        <input id="initItemAB" type="submit" value="Create" class="btn btn-primary" ng-click="initItemAB()">
+      </div>
+
+      <hr>
+
+      <div class="form-group">
+        <label>Purchase</label>
+        <h5 style="color:green;margin-bottom:2%" id="success_purchaseItem">{{purchase_ab}}</h5>
+        <br>
+        user: <input class="form-control" type="text" placeholder="Ex: 사용자" ng-model="purchase.user">
+        itemId: <input class="form-control" type="text" placeholder="Ex: 아이템아이디" ng-model="purchase.itemId">
+      
+        <input id="purchaseItemAB" type="submit" value="Create" class="btn btn-primary" ng-click="purchaseItemAB()">
+      </div>
+
+      <hr>
+
+      <div class="form-group">
+        <label>Invoke</label>
+        <h5 style="color:green;margin-bottom:2%" id="success_invoke">{{invoke_ab}}</h5>
+        <br>
+        A: <input class="form-control" type="text" placeholder="Ex: Hyper" ng-model="transfer.sender">
+        B: <input class="form-control" type="text" placeholder="Ex: Fabric" ng-model="transfer.reciever">
+        Transfer Value: <input class="form-control" type="text" placeholder="Ex: 100" ng-model="transfer.value">
+      
+        <input id="invokeAB" type="submit" value="Transfer" class="btn btn-primary" ng-click="invokeAB()">
+      </div>
+
+      <hr>
+
+      <div class="form-group">
+        <h5 style="color:green;margin-bottom:2%" id="success_query">{{query_ab}}</h5>
+        <label>Query</label>
+        <p><input class="form-control" type="text" placeholder="Ex: A" ng-model="walletid">
+        <input id="queryAB" type="submit" value="Search" class="btn btn-primary" ng-click="queryAB()"></p>
+      </div>
+
+      <hr>
+
+      <div class="form-group">
+        <h5 style="color:green;margin-bottom:2%" id="success_qureyitem" ng-show="queryitem_ab">{{queryitem_ab | json}}</h5>
+        <label>QueryItem</label>
+        <p><input class="form-control" type="text" placeholder="Ex: A" ng-model="itemId">
+        <input id="queryitemAB" type="submit" value="Search" class="btn btn-primary" ng-click="queryitemAB()"></p>
+      </div>
+
+      <hr>
+
+      <div class="form-group">
+        <h5 style="color:green;margin-bottom:2%" id="success_qureypurchase" ng-show="querypurchase_ab">{{querypurchase_ab | json}}</h5>
+        <label>queryPurchase</label>
+        <p><input class="form-control" type="text" placeholder="Ex: A" ng-model="user">
+        <input id="querypurchaseAB" type="submit" value="Search" class="btn btn-primary" ng-click="querypurchaseAB()"></p>
+      </div>
+
+      <hr>
+
+      <div class="form-group">
+        <h5 style="color:green;margin-bottom:2%" id="success_admin">{{admin_ab}}</h5>
+        <label>Admin</label>
+        <p><input id="adminAB" type="submit" value="Search" class="btn btn-primary" ng-click="adminAB()"></p>
+      </div>
+
+      <hr>
+
+      <div class="form-group">
+        <h5 style="color:green;margin-bottom:2%" id="success_delete">{{delete_ab}}</h5>
+        <label>Delete</label>
+        <p><input class="form-control" type="text" placeholder="Ex: A" ng-model="deleteId">
+        <input id="deleteAB" type="submit" value="Delete" class="btn btn-primary" ng-click="deleteAB()"></p>
+      </div>
+      
+    </div>
+  </body>
+  <script type="text/javascript" src="app.js"> </script>
+ </html>
+ 

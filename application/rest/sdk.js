@@ -11,7 +11,7 @@ const walletPath = path.join(process.cwd(), '..', 'wallet');
 const ccpPath = path.resolve(__dirname, '..', 'connection-org1.json');
 const org1UserId = 'appUser';
 
-async function send(type, func, args, res, result){
+async function send(type, func, args, res, callback) {
     try {
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
         const wallet = await Wallets.newFileSystemWallet(walletPath);
@@ -31,24 +31,30 @@ async function send(type, func, args, res, result){
             console.log('Success to connect channel1');
             const contract = network.getContract(chaincodeName);
 
-            if(type){
+            let result;
+            if (type) {
                 result = await contract.evaluateTransaction(func, ...args);
             } else {
                 result = await contract.submitTransaction(func, ...args);
             }
-            res.json(result.toString());
 
+            if (callback) {
+                callback(result.toString());
+            } else {
+                res.json({ status: 'success', result: result.toString() });
+            }
         } catch (error) {
-            res.status(500).send({ error: `${error}`});
-            // process.exit(1);
+            console.error(`Error processing transaction. ${error}`);
+            res.status(500).json({ status: 'error', message: error.toString() });
         } finally {
             gateway.disconnect();
         }
     } catch (error) {
-        res.status(500).send({ error: `${error}`});
-        // process.exit(1);
+        console.error(`Error connecting to gateway. ${error}`);
+        res.status(500).json({ status: 'error', message: error.toString() });
     }
 }
+
 module.exports = {
-    send:send
-}
+    send: send
+};

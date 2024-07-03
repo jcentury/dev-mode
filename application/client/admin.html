@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>관리자 페이지</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <style>
+        body {
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px #ccc;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .btn-primary, .btn-danger {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        #success_recharge {
+            text-align: center;
+        }
+    </style>
+</head>
+<body ng-app="application" ng-controller="AdminCtrl">
+    <div class="container">
+        <h2>관리자 페이지</h2>
+        <button class="btn btn-danger" ng-click="logout()">로그아웃</button>
+        <hr>
+        <div>
+            <h3>포인트 충전</h3>
+            <form ng-submit="rechargePoints()">
+                <div class="form-group">
+                    <label for="userId">사용자 ID</label>
+                    <input type="text" class="form-control" id="userId" ng-model="recharge.userId" required>
+                </div>
+                <div class="form-group">
+                    <label for="amount">충전 금액</label>
+                    <input type="number" class="form-control" id="amount" ng-model="recharge.amount" required>
+                </div>
+                <button type="submit" class="btn btn-primary">충전하기</button>
+            </form>
+            <h5 style="color:green;margin-bottom:2%" id="success_recharge">{{recharge_status}}</h5>
+            <div ng-controller = "AppCtrl">
+                <h3>관리자 정보</h3>
+                <!-- <p>사용자 ID: {{user_info.userId}}</p>
+                <p>사용자 이름: {{user_info.username}}</p> -->
+                <p>자금: {{user_info.balance}}</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="app.js"></script>
+</html>

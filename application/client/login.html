@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>로그인 페이지</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+</head>
+<body ng-app="application" ng-controller="AppCtrl">
+    <div class="container">
+        <h2>로그인</h2>
+        <form ng-submit="loginUser()">
+            <div class="input-group">
+                <label for="userId">사용자 ID</label>
+                <input type="text" id="userId" ng-model="login.userId" required>
+            </div>
+            <div class="input-group">
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" ng-model="login.password" required>
+            </div>
+            <button type="submit">로그인</button>
+            <h5 style="color:green;margin-top:1rem;text-align:center;" id="success_login">{{login_status}}</h5>
+        </form>
+        <p>계정이 없으신가요? <a href="signup.html">회원가입</a></p>
+    </div>
+</body>
+<script type="text/javascript" src="app.js"></script>
+</html>

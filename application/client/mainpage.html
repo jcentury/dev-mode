@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>메인 페이지</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <style>
+        body {
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px #ccc;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .btn-primary, .btn-danger {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        #success_transaction, #success_game {
+            text-align: center;
+        }
+    </style>
+</head>
+<body ng-app="application" ng-controller="AppCtrl">
+    <div class="container">
+        <h2>메인 페이지</h2>
+        <button class="btn btn-danger" ng-click="logout()">로그아웃</button>
+        <hr>
+        <div>
+            <h3>사용자 정보</h3>
+            <p>사용자 ID: {{user_info.userId}}</p>
+            <p>사용자 이름: {{user_info.username}}</p>
+            <p>잔액: {{user_info.balance}}</p>
+        </div>
+        <div>
+            <a href="/recharge" class="btn btn-primary">포인트 충전</a>
+        </div>
+        <a href = "./send.html">보내기</a>
+        <div>
+            <h3>홀짝 게임</h3>
+            <form ng-submit="playGame()">
+                <div class="form-group">
+                    <label for="betAmount">배팅 금액</label>
+                    <input type="number" class="form-control" id="betAmount" ng-model="game.betAmount" required>
+                </div>
+                <div class="form-group">
+                    <label>홀짝 선택</label>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" ng-model="game.choice" value="홀" checked> 홀
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" ng-model="game.choice" value="짝"> 짝
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">게임하기</button>
+            </form>
+            <h5 style="color:green;margin-bottom:2%" id="success_game">{{game_status}}</h5>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="app.js"></script>
+</html>

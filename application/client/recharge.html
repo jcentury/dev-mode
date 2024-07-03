@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recharge Points</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <style>
+        body {
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px #ccc;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .btn-primary, .btn-danger {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        #success_transaction, #success_game {
+            text-align: center;
+        }
+    </style>
+</head>
+<body ng-app="application" ng-controller="AppCtrl">
+    <div class="container">
+        <h2>충전소</h2>
+        <hr>
+        <div class="form-group">
+            <label>잔액</label>
+            <input class="form-control" type="number" placeholder="Enter amount" ng-model="recharge.amount">
+            <input type="submit" value="충전" class="btn btn-primary" ng-click="userRechargePoints()">
+        </div>
+        <a href = './mainpage.html'>메인</a>
+        <h5 style="color:green;margin-bottom:2%" id="success_recharge">{{recharge_status}}</h5>
+    </div>
+</body>
+<script type="text/javascript" src="app.js"> </script>
+</html>
